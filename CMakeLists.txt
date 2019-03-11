@@ -177,6 +177,10 @@ set(NOWIDE_TARGET_TYPES "")
 if(NOWIDE_BUILD_SHARED)
 	list(APPEND NOWIDE_TARGET_TYPES "shared")
 	add_library("${NOWIDE_TARGET_NAME}_shared" SHARED ${NOWIDE_SOURCE} ${NOWIDE_HEADERS})
+    target_include_directories("${NOWIDE_TARGET_NAME}_shared"
+		PUBLIC
+			include
+	)
 	if(WIN32 OR ANDROID OR MSYS)
 		set_target_properties("${NOWIDE_TARGET_NAME}_shared" PROPERTIES
 			OUTPUT_NAME "${TARGET_OUTPUT_NAME}${TARGET_ABI_VER}")
@@ -190,12 +194,17 @@ if(NOWIDE_BUILD_SHARED)
 			SOVERSION "${TARGET_ABI_VER}")
 	endif()
 	set_target_properties("${NOWIDE_TARGET_NAME}_shared" PROPERTIES
-		COMPILE_DEFINITIONS "NOWIDE_DLL")
+		COMPILE_DEFINITIONS "NOWIDE_DLL"
+		FOLDER Externals)
 endif()
 
 if(NOWIDE_BUILD_STATIC)
 	list(APPEND NOWIDE_TARGET_TYPES "static")
 	add_library("${NOWIDE_TARGET_NAME}_static" STATIC ${NOWIDE_SOURCE} ${NOWIDE_HEADERS})
+	target_include_directories("${NOWIDE_TARGET_NAME}_static" 
+		PUBLIC
+			include
+	)
 	if(MSVC)
 		set_target_properties("${NOWIDE_TARGET_NAME}_static" PROPERTIES
 			OUTPUT_NAME "${TARGET_OUTPUT_NAME}${TARGET_ABI_VER}_static")
@@ -203,6 +212,9 @@ if(NOWIDE_BUILD_STATIC)
 		set_target_properties("${NOWIDE_TARGET_NAME}_static" PROPERTIES
 			OUTPUT_NAME "${TARGET_OUTPUT_NAME}${TARGET_ABI_VER}")
 	endif()
+
+	set_target_properties("${NOWIDE_TARGET_NAME}_static" PROPERTIES
+		FOLDER Externals)
 endif()
 
 foreach(NOWIDE_TARGET_TYPE ${NOWIDE_TARGET_TYPES})
