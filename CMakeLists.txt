@@ -1,11 +1,5 @@
 cmake_minimum_required(VERSION 2.8.5)
 
-if(NOT CMAKE_VERSION VERSION_LESS "3.0")
-    cmake_policy(SET CMP0048 OLD)
-endif()
-if(NOT CMAKE_VERSION VERSION_LESS "3.1")
-    cmake_policy(SET CMP0054 OLD)
-endif()
 if(NOT CMAKE_VERSION VERSION_LESS "3.3")
     cmake_policy(SET CMP0063 NEW)
     set(HONOR_VISIBILITY TRUE)
