@@ -58,7 +58,9 @@ set(NOWIDE_HEADERS
 	"${PROJECT_SOURCE_DIR}/include/nowide/utf.hpp")
 
 set(NOWIDE_SOURCE
-	"${PROJECT_SOURCE_DIR}/src/iostream.cpp")
+	"${PROJECT_SOURCE_DIR}/src/iostream.cpp"
+    "${PROJECT_SOURCE_DIR}/src/nowide.cpp"
+)
 
 #
 # Require C++11 Standard
